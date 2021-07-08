@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.utilitario.util.ValidaCPF;
+
 @Controller
 public class IndexController {
 
@@ -14,12 +16,13 @@ public class IndexController {
 		return "index";
 	}
 
-	@PostMapping("/mostrar")
-	public String mostrarNome(@RequestParam(name = "nome") Integer nome, Model model) {
-		model.addAttribute("nn", nome);
-
-		System.out.println("Nome: " + nome);
-			asdf
+	@PostMapping("/validarCpf")
+	public String validarCpf(@RequestParam(name = "cpf") String cpf, Model model) {
+		Boolean cpfValido = false;
+		if(ValidaCPF.isCPF(cpf)) {
+			cpfValido=true;
+		}		
+		model.addAttribute("cpfValido", cpfValido);
 		return "index";
 	}
 }
