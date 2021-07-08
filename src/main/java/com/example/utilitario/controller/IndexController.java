@@ -19,7 +19,7 @@ public class IndexController {
 		model.addAttribute("nn", nome);
 
 		System.out.println("Nome: " + nome);
-
+			asdf
 		return "index";
 	}
 }
