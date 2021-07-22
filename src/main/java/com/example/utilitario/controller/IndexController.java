@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.utilitario.model.Recibo;
 import com.example.utilitario.util.ValidaCPF;
 import com.example.utilitario.util.ValorExtenso;
 
@@ -29,23 +30,20 @@ public class IndexController {
 	}
 
 	@PostMapping("/gerarRecibo")
-	public ModelAndView gerarRecibo(@RequestParam(name = "cpfEmissor") String cpfEmissor,
-			@RequestParam(name = "nomeEmissor") String nomeEmissor,
-			@RequestParam(name = "valorPagamento", defaultValue = "0") Double valorPagamento) {
+	public ModelAndView gerarRecibo(Recibo recibo) {
 		
 		ModelAndView paginaErro = new ModelAndView("erro");
 	
-		if (!ValidaCPF.isCPF(cpfEmissor)) {
+	
+		if (!ValidaCPF.isCPF(recibo.getCpfEmissor())) {
 			paginaErro.addObject("mensagem", "CPF Inválido");
 			return paginaErro;
 		}
 		
 		ModelAndView paginaRecibo = new ModelAndView("recibo");
-		paginaRecibo.addObject("cpfEmissor", cpfEmissor);
-		paginaRecibo.addObject("nomeEmissor", nomeEmissor);
-		paginaRecibo.addObject("valorPagamento", valorPagamento);	
-		String valor=ValorExtenso.valorPorExtenso(valorPagamento);
-		paginaRecibo.addObject("valorPagamentoPorExtenso", valor);
+		//String valorExtenso=ValorExtenso.valorPorExtenso(recibo.getValorPagamento());
+		//recibo.setValorExtenso(valorExtenso);
+		paginaRecibo.addObject("recibo", recibo);
 
 		return paginaRecibo;
 	}
