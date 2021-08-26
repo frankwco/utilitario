@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Exemplo Vuejs</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+<div id="app">
+	<input type="number" v-model.number="calculadora.valor1"/>
+	<input type="number" v-model.number="calculadora.valor2"/>
+	<button @click="calculadora.resultado = calculadora.valor1+calculadora.valor2">Somar</button>
+	<h3>{{calculadora.resultado}}</h3>
+	
+	<ul>
+		<li v-for="time in times">{{time}}</li>
+	</ul>
+	
+	<ul>
+		<li v-for="comment in comments">{{comment.id}}-{{comment.body}}</li>
+	</ul>
+	
+</div>
+
+<script>
+	const app = new Vue({
+		el:'#app',
+		data:{
+			helloVue:'Olá Mundo Vue',
+			calculadora:{valor1:null, valor2:null, resultado:null},
+			times:['Palmeiras', 'Corinthians', 'Flamengo'],
+			comments:[]
+			},
+			created(){
+				fetch('https://my-json-server.typicode.com/typicode/demo/comments')
+				.then(response=>response.json())
+				.then(data=>{
+					this.comments=data;
+					})
+				}	
+		})
+</script>
+</body>
+</html>

@@ -12,6 +12,18 @@
 	</form>
 
 	<span th:text="'O CPF é: ' + ${cpfValido}"></span>
+	
+	<h1>Recibo</h1>
+	
+	<form method="post" action="/gerarRecibo">
+	Nome Emissor: <input type="text" name="nomeEmissor" /><br/>
+	CPF Emissor: <input type="text" name="cpfEmissor" /><br/>
+	Valor Pagamento: <input type="number" name="valorPagamento" /> <br/>  
+		
+		
+		<input type="submit"
+			value="Gerar Recibo" />
+	</form>
 
 </body>
 </html>
