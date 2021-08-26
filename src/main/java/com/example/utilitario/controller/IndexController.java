@@ -18,6 +18,11 @@ public class IndexController {
 	public String index(Model model) {
 		return "index";
 	}
+	
+	@GetMapping("/vue")
+	public String chamarVue(Model model) {
+		return "exemplo-vue";
+	}
 
 	@PostMapping("/validarCpf")
 	public String validarCpf(@RequestParam(name = "cpf") String cpf, Model model) {
